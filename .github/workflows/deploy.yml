@@ -22,31 +22,31 @@ jobs:
      - run: ./gradlew build --no-daemon
     
 
-  deploy:
-    name: Deploy to AWS
-    runs-on: ubuntu-latest
-    environment: production
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: AKIA343DTCDI2QZS2NVW
-        aws-secret-access-key: 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
-        aws-region: us-east-1
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
-    - name: Build, tag, and push image to Amazon ECR
-      id: build-image
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        docker build -t wuprepo .
-        docker push wuprepo
+  #deploy:
+   # name: Deploy to AWS
+    #runs-on: ubuntu-latest
+    #environment: production
+#
+ #   steps:
+  #  - name: Checkout
+   #   uses: actions/checkout@v2
+#
+ #   - name: Configure AWS credentials
+  #    uses: aws-actions/configure-aws-credentials@v1
+   #   with:
+    #    aws-access-key-id: AKIA343DTCDI2QZS2NVW
+     #   aws-secret-access-key: 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
+      #  aws-region: us-east-1
+#
+ #   - name: Login to Amazon ECR
+  #    id: login-ecr
+   #   uses: aws-actions/amazon-ecr-login@v1
+#
+ #   - name: Build, tag, and push image to Amazon ECR
+  #    id: build-image
+   #   env:
+    #    ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+     #   IMAGE_TAG: ${{ github.sha }}
+      #run: |
+       # docker build -t wuprepo .
+        #docker push wuprepo
